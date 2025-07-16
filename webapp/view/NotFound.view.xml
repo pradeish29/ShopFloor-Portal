@@ -1,0 +1,11 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
+	<Page title="{i18n>notFoundTitle}" showNavButton="true" navButtonPress="onNavBack">
+		<content>
+			<VBox alignItems="Center" justifyContent="Center" class="sapUiContentPadding">
+				<Icon src="sap-icon://documents" size="5rem" color="Neutral" class="sapUiMediumMarginBottom"/>
+				<Title text="{i18n>notFoundTitle}" level="H2" class="sapUiMediumMarginBottom"/>
+				<Text text="{i18n>notFoundText}"/>
+			</VBox>
+		</content>
+	</Page>
+</mvc:View>

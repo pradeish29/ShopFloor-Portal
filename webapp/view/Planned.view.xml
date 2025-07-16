@@ -1,0 +1,86 @@
+<!-- File: Planned.view.xml -->
+<mvc:View
+  controllerName="ZSHOPFLOOR_PM.controller.Planned"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core">
+
+  <Page title="Planned Orders" showNavButton="true" navButtonPress="onNavBack">
+    <content>
+      <VBox>
+        <!-- Year Tabs -->
+        <IconTabBar
+          id="yearTabBar"
+          visible="{= ${filterModel>/filterType} === 'year' }"
+          select="onYearTabSelect"
+          selectedKey="{filterModel>/selectedTab}">
+          <items>
+            <IconTabFilter text="2021" key="2021"/>
+            <IconTabFilter text="2022" key="2022"/>
+            <IconTabFilter text="2023" key="2023"/>
+            <IconTabFilter text="2024" key="2024"/>
+            <IconTabFilter text="2025" key="2025"/>
+          </items>
+        </IconTabBar>
+
+        <!-- Month Tabs -->
+        <IconTabBar
+          id="monthTabBar"
+          visible="{= ${filterModel>/filterType} === 'month' }"
+          select="onTabSelect"
+          selectedKey="{filterModel>/selectedTab}">
+          <items>
+            <IconTabFilter text="Jan" key="01"/>
+            <IconTabFilter text="Feb" key="02"/>
+            <IconTabFilter text="Mar" key="03"/>
+            <IconTabFilter text="Apr" key="04"/>
+            <IconTabFilter text="May" key="05"/>
+            <IconTabFilter text="Jun" key="06"/>
+            <IconTabFilter text="Jul" key="07"/>
+            <IconTabFilter text="Aug" key="08"/>
+            <IconTabFilter text="Sep" key="09"/>
+            <IconTabFilter text="Oct" key="10"/>
+            <IconTabFilter text="Nov" key="11"/>
+            <IconTabFilter text="Dec" key="12"/>
+          </items>
+        </IconTabBar>
+
+        <!-- Table -->
+        <Table
+          id="plannedTable"
+          items="{plannedModel>/results}"
+          growing="true"
+          growingThreshold="50"
+          growingScrollToLoad="true">
+          <columns>
+            <Column><Text text="Order No"/></Column>
+            <Column><Text text="Material No"/></Column>
+            <Column><Text text="Description"/></Column>
+            <Column><Text text="Qty"/></Column>
+            <!--<Column><Text text="Unit"/></Column>-->
+            <Column><Text text="Planner Group"/></Column>
+            <Column><Text text="Status"/></Column>
+            <Column><Text text="Start Date"/></Column>
+            <Column><Text text="End Date"/></Column>
+          </columns>
+          <items>
+            <ColumnListItem>
+              <cells>
+                <Text text="{plannedModel>WfOrderno}"/>
+                <Text text="{plannedModel>WfMatno}"/>
+                <Text text="{plannedModel>WfMatdesc}"/>
+                <ObjectNumber number="{plannedModel>WfOrderquant}" unit="{plannedModel>WfUnit}"/>
+                <!--<Text text="{plannedModel>WfUnit}"/>-->
+                <Text text="{plannedModel>WfGroupname}"/>
+                <ObjectStatus text="{plannedModel>WfStatustxt}" state="{path: 'plannedModel>WfStatustxt', formatter: '.formatStatusState'}"/>
+                <Text text="{path: 'plannedModel>WfStartdate', formatter: '.formatDate'}"/>
+                <Text text="{path: 'plannedModel>WfEnddate', formatter: '.formatDate'}"/>
+              </cells>
+            </ColumnListItem>
+          </items>
+        </Table>
+
+      </VBox>
+    </content>
+  </Page>
+</mvc:View>

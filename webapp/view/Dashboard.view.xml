@@ -1,0 +1,93 @@
+<mvc:View
+  controllerName="ZSHOPFLOOR_PM.controller.Dashboard"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core">
+
+  <Page id="dashboardPage" showNavButton="false" class="sapUiContentPadding">
+
+    <customHeader>
+      <Bar>
+        <contentLeft>
+          <Button id="backButton" icon="sap-icon://nav-back" press="onBackToDashboard"
+                  visible="{= !${filterModel>/showDashboard}}" type="Transparent"/>
+          <Title id="pageTitle" text="{= ${filterModel>/showDashboard} ? 'Dashboard' : 'Order Details'}"/>
+        </contentLeft>
+        <contentMiddle>
+          <Label text="{plantModel>/companyName}" class="sapUiMediumMarginTop"/>
+        </contentMiddle>
+        <contentRight>
+          <Button text="Logout" press="onLogoutPress" type="Emphasized" icon="sap-icon://log"/>
+        </contentRight>
+      </Bar>
+    </customHeader>
+
+    <content>
+      <VBox class="sapUiContentPadding">
+
+        <!-- Plant Info -->
+        <VBox class="sapUiSmallMarginBottom sapUiResponsiveMargin" visible="{= !!${orderModel>/results/0/Werks} }">
+          <Title text="🏭 Plant Overview" level="H3" class="sapUiTinyMarginBottom"/>
+          <HBox>
+            <VBox class="sapUiSmallMarginEnd" width="300px">
+              <Label text="Plant Code"/>
+              <Text text="{orderModel>/results/0/Werks}" />
+            </VBox>
+            <VBox class="sapUiSmallMarginEnd" width="300px">
+              <Label text="Name"/>
+              <Text text="{orderModel>/results/0/Name1}" />
+            </VBox>
+            <VBox class="sapUiSmallMarginEnd" width="300px">
+              <Label text="City"/>
+              <Text text="{orderModel>/results/0/Ort01}" />
+            </VBox>
+            <VBox class="sapUiSmallMarginEnd" width="300px">
+              <Label text="Postal Code"/>
+              <Text text="{orderModel>/results/0/Pstlz}" />
+            </VBox>
+          </HBox>
+        </VBox>
+
+        <!-- Dashboard Tiles -->
+        <Title text="📊 Plant Dashboard" level="H3" class="sapUiTinyMarginTop sapUiTinyMarginBottom" />
+        <FlexBox id="dashboardTiles" class="sapUiSmallMarginTop" direction="Row" wrap="Wrap" justifyContent="Start">
+          
+          <GenericTile header="Production Orders" subheader="Year-wise" press="onProdYearPress" class="sapUiSmallMarginEnd sapUiSmallMarginBottom" width="200px">
+            <tileContent>
+              <TileContent>
+                <NumericContent value="1" valueColor="Good" icon="sap-icon://factory" />
+              </TileContent>
+            </tileContent>
+          </GenericTile>
+
+          <GenericTile header="Production Orders" subheader="Month-wise" press="onProdMonthPress" class="sapUiSmallMarginEnd sapUiSmallMarginBottom" width="200px">
+            <tileContent>
+              <TileContent>
+                <NumericContent value="2" valueColor="Critical" icon="sap-icon://wrench" />
+              </TileContent>
+            </tileContent>
+          </GenericTile>
+
+          <GenericTile header="Planned Orders" subheader="Year-wise" press="onPlanYearPress" class="sapUiSmallMarginEnd sapUiSmallMarginBottom" width="200px">
+            <tileContent>
+              <TileContent>
+                <NumericContent value="3" valueColor="Error" icon="sap-icon://quality-issue" />
+              </TileContent>
+            </tileContent>
+          </GenericTile>
+
+          <GenericTile header="Planned Orders" subheader="Month-wise" press="onPlanMonthPress" class="sapUiSmallMarginEnd sapUiSmallMarginBottom" width="200px">
+            <tileContent>
+              <TileContent>
+                <NumericContent value="4" valueColor="Neutral" icon="sap-icon://pie-chart" />
+              </TileContent>
+            </tileContent>
+          </GenericTile>
+
+        </FlexBox>
+
+      </VBox>
+    </content>
+
+  </Page>
+</mvc:View>

@@ -1,0 +1,151 @@
+{
+	"_version": "1.7.0",
+	"sap.app": {
+		"id": "ZSHOPFLOOR_PM",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"sourceTemplate": {
+			"id": "servicecatalog.connectivityComponent",
+			"version": "0.0.0"
+		},
+		"dataSources": {
+			"mainService": {
+				"uri": "/sap/opu/odata/sap/ZODATA_SHOP_PM_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": ["sap_hcb", "sap_belize"]
+	},
+	"sap.ui5": {
+		"flexEnabled": false,
+		"rootView": {
+			"viewName": "ZSHOPFLOOR_PM.view.APP",
+			"type": "XML",
+			"id": "app"
+		},
+		"dependencies": {
+			"minUI5Version": "1.30.0",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {},
+				"sap.ushell": {},
+				"sap.collaboration": {},
+				"sap.ui.comp": {},
+				"sap.uxap": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "ZSHOPFLOOR_PM.i18n.i18n"
+				}
+			},
+			"": {
+				"dataSource": "mainService",
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultBindingMode": "TwoWay",
+					"defaultCountMode": "Inline"
+				}
+			}
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "ZSHOPFLOOR_PM.view",
+				"controlId": "app",
+				"controlAggregation": "pages",
+				"async": true
+			},
+			"routes": [{
+				"pattern": "",
+				"name": "Login",
+				"target": "Login"
+			}, {
+				"pattern": "home",
+				"name": "Home",
+				"target": "Home"
+			}, {
+				"pattern": "dashboard/{plantId}",
+				"name": "Dashboard",
+				"target": "Dashboard"
+			}, {
+				"pattern": "planned/{plantId}/{filterType}",
+				"name": "PlannedFilterSelect",
+				"target": "Planned"
+			}, {
+				"pattern": "planned/{plantId}/{filterType}/{filterValue}",
+				"name": "PlannedFiltered",
+				"target": "Planned"
+			}, {
+				"pattern": "production/{plantId}/{filterType}",
+				"name": "ProductionFilterSelect",
+				"target": "Production"
+			}, {
+				"pattern": "production/{plantId}/{filterType}/{filterValue}",
+				"name": "ProductionFiltered",
+				"target": "Production"
+			}],
+			"targets": {
+				"Login": {
+					"viewName": "Login"
+				},
+				"Home": {
+					"viewName": "Home"
+				},
+				"Dashboard": {
+					"viewName": "Dashboard",
+					"viewType": "XML"
+				},
+				"Planned": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewName": "Planned"
+				},
+				"Production": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewName": "Production"
+				}
+			}
+		},
+		"resources": {
+			"css": [{
+				"uri": "css/style.css"
+			}]
+		}
+	}
+}

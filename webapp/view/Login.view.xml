@@ -1,0 +1,13 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="ZSHOPFLOOR_PM.controller.Login">
+	<Page title="{i18n>loginTitle}" class="sapUiContentPadding">
+		<content>
+			<VBox alignItems="Center" justifyContent="Center" class="sapUiMediumMarginTop">
+				<Title text="{i18n>welcomeTitle}" level="H2" class="sapUiSmallMarginBottom"/>
+				<Input id="userIdInput" placeholder="{i18n>userIdLabel}" width="300px" maxLength="8" required="true"/>
+				<Input id="passwordInput" type="Password" placeholder="{i18n>passwordLabel}" width="300px" required="true" class="sapUiSmallMarginTop"/>
+				<Button id="loginButton" text="{i18n>loginButton}" width="150px" press="onLoginPress" type="Emphasized" class="sapUiSmallMarginTop"/>
+				<Text id="loginMessage" text="" visible="false" class="sapUiTinyMarginTop"/>
+			</VBox>
+		</content>
+	</Page>
+</mvc:View>

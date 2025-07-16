@@ -1,0 +1,22 @@
+<mvc:View
+  controllerName="ZSHOPFLOOR_PM.controller.Home"
+  xmlns="sap.m"
+  xmlns:mvc="sap.ui.core.mvc">
+  <Page title="Welcome to Shop Floor Portal" showNavButton="false">
+
+    <content>
+      <VBox class="sapUiSmallMargin">
+        <Text text="Select a Plant to Proceed:" class="sapUiMediumMarginBottom" />
+        <FlexBox
+          id="plantContainer"
+          direction="Row"
+          wrap="Wrap"
+          justifyContent="SpaceBetween"
+   
+          class="sapUiSmallMargin">
+        </FlexBox>
+      </VBox>
+    </content>
+
+  </Page>
+</mvc:View>

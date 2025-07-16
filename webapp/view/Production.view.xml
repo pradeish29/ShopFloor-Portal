@@ -1,0 +1,91 @@
+<mvc:View
+controllerName="ZSHOPFLOOR_PM.controller.Production"
+xmlns:mvc="sap.ui.core.mvc"
+xmlns="sap.m"
+xmlns:core="sap.ui.core"
+xmlns:table="sap.ui.table">
+
+<Page title="Production Orders" showNavButton="true" navButtonPress="onNavBack"> <content> <VBox class="production-orders-root">
+
+    <!-- YEAR TABS -->
+    <IconTabBar id="yearTabBar"
+                select="onYearTabSelect"
+                visible="{= ${filterModel>/filterType} === 'year' }"
+                selectedKey="{filterModel>/selectedTab}">
+      <items>
+        <IconTabFilter text="2021" key="2021" />
+        <IconTabFilter text="2022" key="2022" />
+        <IconTabFilter text="2023" key="2023" />
+        <IconTabFilter text="2024" key="2024" />
+        <IconTabFilter text="2025" key="2025" />
+      </items>
+    </IconTabBar>
+
+    <!-- MONTH TABS -->
+    <IconTabBar id="monthTabBar"
+                select="onTabSelect"
+                visible="{= ${filterModel>/filterType} === 'month' }"
+                selectedKey="{filterModel>/selectedTab}">
+      <items>
+        <IconTabFilter text="Jan" key="01" />
+        <IconTabFilter text="Feb" key="02" />
+        <IconTabFilter text="Mar" key="03" />
+        <IconTabFilter text="Apr" key="04" />
+        <IconTabFilter text="May" key="05" />
+        <IconTabFilter text="Jun" key="06" />
+        <IconTabFilter text="Jul" key="07" />
+        <IconTabFilter text="Aug" key="08" />
+        <IconTabFilter text="Sep" key="09" />
+        <IconTabFilter text="Oct" key="10" />
+        <IconTabFilter text="Nov" key="11" />
+        <IconTabFilter text="Dec" key="12" />
+      </items>
+    </IconTabBar>
+
+    <!-- No Data Message -->
+    <VBox id="noDataContainer" visible="false" justifyContent="Center" alignItems="Center">
+      <core:Icon src="sap-icon://factory" size="4rem" color="#666" />
+      <Text text="No production orders found for this selection" />
+      <Text text="Try selecting another tab or check later." />
+    </VBox>
+
+    <!-- DATA TABLE -->
+    <VBox id="tableContainer" visible="{filterModel>/hasData}">
+      <Table id="productionTable"
+             width="100%"
+             items="{productionModel>/results}"
+             growing="true"
+             growingThreshold="50"
+             growingScrollToLoad="true">
+        <columns>
+          <Column><Text text="Order No" /></Column>
+          <Column><Text text="Material No" /></Column>
+          <Column><Text text="Description" /></Column>
+          <Column hAlign="End"><Text text="Quantity" /></Column>
+          <Column><Text text="Planner Group" /></Column>
+          <Column><Text text="MRP Controller" /></Column>
+          <Column><Text text="Status" /></Column>
+          <Column><Text text="Start Date" /></Column>
+          <Column><Text text="End Date" /></Column>
+        </columns>
+        <items>
+          <ColumnListItem>
+            <cells>
+              <Text text="{productionModel>Ordernumber}" />
+              <Text text="{productionModel>Materialnumber}" />
+              <Text text="{productionModel>Materialdesc}" maxLines="2" />
+              <ObjectNumber number="{productionModel>Orderquantity}" unit="{productionModel>Unitofmeasure}" />
+              <Text text="{productionModel>Plannergroupname}" />
+              <Text text="{productionModel>Mrpcontrollercode}" />
+              <ObjectStatus text="{productionModel>Ordertypetext}" state="{path: 'productionModel>Ordertypetext', formatter: '.formatStatusState'}" />
+              <Text text="{path: 'productionModel>Startdate', formatter: '.formatDate'}" />
+              <Text text="{path: 'productionModel>Enddate', formatter: '.formatDate'}" />
+            </cells>
+          </ColumnListItem>
+        </items>
+      </Table>
+    </VBox>
+
+  </VBox>
+</content>
+</Page> </mvc:View>
